@@ -6,17 +6,17 @@ public class ContributorDto implements Serializable {
 	
 	private static final long serialVersionUID = -491461820432610472L;
 	
-	private String contributorId;
+	private long id;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String city;
 	
-	public String getContributorId() {
-		return contributorId;
+	public long getId() {
+		return id;
 	}
-	public void setContributorId(String contributorId) {
-		this.contributorId = contributorId;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getFirstName() {
 		return firstName;
