@@ -2,17 +2,17 @@ package com.pratap.contributors.model;
 
 public class ContributorResponceModel {
 
-	private long id;
+	private String contributorId;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String city;
 	
-	public long getId() {
-		return id;
+	public String getContributorId() {
+		return contributorId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setContributorId(String contributorId) {
+		this.contributorId = contributorId;
 	}
 	public String getFirstName() {
 		return firstName;
