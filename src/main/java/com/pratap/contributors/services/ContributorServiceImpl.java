@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pratap.contributors.dto.ContributorDto;
-import com.pratap.contributors.entities.Contributor;
-import com.pratap.contributors.exceptions.ContributorNotFoundException;
+import com.pratap.contributors.entities.ContributorEntity;
+import com.pratap.contributors.exceptions.ContributorServiceException;
 import com.pratap.contributors.repos.ContributorRepository;
 
 @Service
@@ -24,9 +24,9 @@ public class ContributorServiceImpl implements ContributorService {
 	@Override
 	public List<ContributorDto> getContributorsByCity(String city) {
 
-		List<Contributor> entities = repository.findByCity(city);
+		List<ContributorEntity> entities = repository.findByCity(city);
 		if (entities == null || entities.isEmpty()) {
-			throw new ContributorNotFoundException("No one contribute yet in this - " + city);
+			throw new ContributorServiceException("No one contribute yet in this - " + city);
 		}
 
 		return entities.stream()

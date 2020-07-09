@@ -25,8 +25,8 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@ExceptionHandler(ContributorNotFoundException.class)
-	public final ResponseEntity<Object> handleCouponNotFoundException(ContributorNotFoundException ex, WebRequest request) {
+	@ExceptionHandler(ContributorServiceException.class)
+	public final ResponseEntity<Object> handleCouponNotFoundException(ContributorServiceException ex, WebRequest request) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
 				request.getDescription(false));
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.NOT_FOUND);

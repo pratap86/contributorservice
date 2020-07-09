@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
-public class ContributorNotFoundException extends RuntimeException {
+public class ContributorServiceException extends RuntimeException {
 
 	private static final long serialVersionUID = 7065730553879134065L;
 
-	public ContributorNotFoundException(String message) {
+	public ContributorServiceException(String message) {
 		super(message);
 	}
 
