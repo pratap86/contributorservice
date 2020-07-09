@@ -5,6 +5,9 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.pratap.contributors.dto.ContributorDto;
@@ -22,14 +25,17 @@ public class ContributorServiceImpl implements ContributorService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public List<ContributorDto> getContributorsByCity(String city) {
+	public List<ContributorDto> getContributorsByCity(String city, int page, int limit) {
 
-		List<ContributorEntity> entities = repository.findByCity(city);
-		if (entities == null || entities.isEmpty()) {
+		Pageable pageableRequest = PageRequest.of(page, limit, Sort.by("firstName"));
+		
+		List<ContributorEntity> contributors = repository.findByCity(city, pageableRequest);
+		
+		if (contributors == null || contributors.isEmpty()) {
 			throw new ContributorServiceException("No one contribute yet in this - " + city);
 		}
 
-		return entities.stream()
+		return contributors.stream()
 				.map(contributor -> modelMapper.map(contributor, ContributorDto.class)).collect(Collectors.toList());
 	}
 
