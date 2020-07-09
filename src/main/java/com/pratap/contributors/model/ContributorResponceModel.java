@@ -7,7 +7,6 @@ public class ContributorResponceModel {
 	private String lastName;
 	private String email;
 	private String city;
-	
 	public String getContributorId() {
 		return contributorId;
 	}
