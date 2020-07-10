@@ -25,9 +25,9 @@ public class ContributorServiceImpl implements ContributorService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public List<ContributorDto> getContributorsByCity(String city, int page, int limit) {
+	public List<ContributorDto> getContributorsByCity(String city, int page, int limit, String sortBy) {
 
-		Pageable pageableRequest = PageRequest.of(page, limit, Sort.by("firstName"));
+		Pageable pageableRequest = PageRequest.of(page, limit, Sort.by(sortBy));
 		
 		List<ContributorEntity> contributors = repository.findByCity(city, pageableRequest);
 		
