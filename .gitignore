@@ -5,6 +5,7 @@ target/
 !**/src/test/**
 .mvn/
 *.log
+*.gz
 mvnw
 mvnw.cmd
 
