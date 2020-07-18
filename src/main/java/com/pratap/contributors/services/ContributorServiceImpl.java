@@ -5,11 +5,14 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.pratap.contributors.dto.ContributorDto;
-import com.pratap.contributors.entities.Contributor;
-import com.pratap.contributors.exceptions.ContributorNotFoundException;
+import com.pratap.contributors.entities.ContributorEntity;
+import com.pratap.contributors.exceptions.ContributorServiceException;
 import com.pratap.contributors.repos.ContributorRepository;
 
 @Service
@@ -22,14 +25,17 @@ public class ContributorServiceImpl implements ContributorService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public List<ContributorDto> getContributorsByCity(String city) {
+	public List<ContributorDto> getContributorsByCity(String city, int page, int limit, String sortBy) {
 
-		List<Contributor> entities = repository.findByCity(city);
-		if (entities == null || entities.isEmpty()) {
-			throw new ContributorNotFoundException("No one contribute yet in this - " + city);
+		Pageable pageableRequest = PageRequest.of(page, limit, Sort.by(sortBy));
+		
+		List<ContributorEntity> contributors = repository.findByCity(city, pageableRequest);
+		
+		if (contributors == null || contributors.isEmpty()) {
+			throw new ContributorServiceException("No one contribute yet in this - " + city);
 		}
 
-		return entities.stream()
+		return contributors.stream()
 				.map(contributor -> modelMapper.map(contributor, ContributorDto.class)).collect(Collectors.toList());
 	}
 

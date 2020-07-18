@@ -6,5 +6,5 @@ import com.pratap.contributors.dto.ContributorDto;
 
 public interface ContributorService {
 
-	List<ContributorDto> getContributorsByCity(String city);
+	List<ContributorDto> getContributorsByCity(String city, int page, int limit, String sortBy);
 }

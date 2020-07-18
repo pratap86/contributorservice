@@ -27,9 +27,10 @@ public class ContributorController {
 	private ModelMapper modelMapper;
 	
 	@GetMapping("/search")
-	public ResponseEntity<List<ContributorResponceModel>> getContributorsByCity(@RequestParam("city") String city){
+	public ResponseEntity<List<ContributorResponceModel>> getContributorsByCity(@RequestParam(value = "city") String city, @RequestParam(value = "page", defaultValue = "0") int page, 
+			@RequestParam(value = "limit", defaultValue = "25") int limit, @RequestParam(value = "sortBy", defaultValue = "firstName") String sortBy){
 		
-		List<ContributorDto> dtos = service.getContributorsByCity(city);
+		List<ContributorDto> dtos = service.getContributorsByCity(city, page, limit, sortBy);
 		List<ContributorResponceModel> respValues = dtos.stream()
 				.map(dto -> modelMapper.map(dto, ContributorResponceModel.class)).collect(Collectors.toList());
 		return ResponseEntity.status(HttpStatus.OK).body(respValues);
