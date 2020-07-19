@@ -21,7 +21,6 @@ public class ContributorServiceImpl implements ContributorService {
 	@Autowired
 	private ContributorRepository repository;
 
-	@Autowired
 	private ModelMapper modelMapper;
 
 	@Override
@@ -35,6 +34,8 @@ public class ContributorServiceImpl implements ContributorService {
 			throw new ContributorServiceException("No one contribute yet in this - " + city);
 		}
 
+		modelMapper = new ModelMapper();
+		
 		return contributors.stream()
 				.map(contributor -> modelMapper.map(contributor, ContributorDto.class)).collect(Collectors.toList());
 	}
