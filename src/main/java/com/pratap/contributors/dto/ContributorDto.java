@@ -12,6 +12,20 @@ public class ContributorDto implements Serializable {
 	private String email;
 	private String city;
 	
+	public ContributorDto() {
+		
+	}
+	
+	
+	public ContributorDto(String contributorId, String firstName, String lastName, String email, String city) {
+		this.contributorId = contributorId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.city = city;
+	}
+
+
 	public String getContributorId() {
 		return contributorId;
 	}
